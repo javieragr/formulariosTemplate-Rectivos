@@ -1,1 +1,88 @@
-<p>dinamicos works!</p>
+<h2>Template Reactivos</h2>
+<hr>
+
+<form [formGroup]="miFormulario" (ngSubmit)="guardar()" >
+
+    <!-- Nombre -->
+    <div class="mb-3 row"></div>
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9" >
+        <input class="form-control"
+            [formControl]="nuevoFavorito"
+            type="text"
+           formControlName="nombre"
+            
+            placeholder="nombre de la persona"
+        >
+        <span *ngIf="campoValido('nombre')"
+            class="form-text text-danger" >
+            este campo es obligatorio</span>
+    </div>
+
+
+<!-- agregar favorito -->
+    <div class="mb-3 row"></div>
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9" >
+        <div class="input-group">
+            <input class="form-control"
+            (keyup.enter)="agregarFavorito()"
+            [formControl]="nuevoFavorito"
+            placeholder="Agregar juego favorito"
+         >
+         <button (click)="agregarFavorito()" class="btn btn-outline-primary" type="button" >
+             Agregar
+            </button>
+        </div>
+        
+        
+    </div>
+
+    <div class="mb-3 row"></div>
+    <label class="col-sm-3 col-form-label">Favoritos</label>
+    <div class="col-sm-9" formArrayName="favoritos" >
+        <div  *ngFor="let favorito of favoritosArr.controls; let i = index" class="input-group mb-1">
+            <input 
+            class="form-control " 
+           [formControlName]="i"
+            
+            >
+            <button class="btn btn-outline-danger"  (click)="eliminar(i)" type="button" >
+                eliminar
+               </button>
+        </div>
+       
+      
+       
+    </div>
+
+
+    <br>
+    <div class="col-sm-9" >
+        
+        <button 
+            type="button" 
+            class="btn btn-primary float-end " 
+            (click)="guardar()"
+           >
+            Guardar
+        </button>
+
+    </div>
+
+
+</form>
+
+<!-- 
+<div>
+    <span>Persona</span>
+    <pre>{{persona | json}}</pre>
+</div> -->
+<span>Valid</span>
+<pre>{{miFormulario.valid| json}}</pre>
+<span>Value</span>
+<pre>{{miFormulario.value|json}}</pre>
+<span>Agregar Juego</span>
+<pre>{{nuevoFavorito.valid|json}}</pre>
+<br>
+<pre>{{nuevoFavorito.value|json}}</pre>
