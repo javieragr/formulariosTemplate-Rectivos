@@ -5,8 +5,10 @@ import { TemplateRoutingModule } from './template-routing.module';
 import { BasicosComponent } from './basicos/basicos.component';
 import { DinamicosComponent } from './dinamicos/dinamicos.component';
 import { SwitchesComponent } from './switches/switches.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { CustomMinDirective } from './directives/custom-min.directive';
+import { PruebaFormularioComponent } from './formulario/prueba-formulario/prueba-formulario.component';
 
 
 @NgModule({
@@ -14,12 +16,15 @@ import { CustomMinDirective } from './directives/custom-min.directive';
     BasicosComponent,
     DinamicosComponent,
     SwitchesComponent,
-    CustomMinDirective
+    CustomMinDirective,
+    PruebaFormularioComponent
   ],
   imports: [
     CommonModule,
     TemplateRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    // FlexLayoutModule
   ]
 })
 export class TemplateModule { }
