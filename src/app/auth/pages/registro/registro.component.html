@@ -21,7 +21,11 @@
                     formControlName="email"
                     class="form-control" 
                     placeholder="email del usuario" >
-                    <span *ngIf="campoNoValido('email')" class="form-text text-danger" > debe ser formato email</span>
+                    <!-- <span *ngIf="campoNoValido('email')" class="form-text text-danger" > {{emailErrorMsg}}</span> -->
+                    <span *ngIf="emailRequired()" class="form-text text-danger" > el email es requerido</span>
+                    <span *ngIf="emailFormato()" class="form-text text-danger" > debe ser formato email</span>
+                    <span *ngIf="emailTomado()" class="form-text text-danger" > este email ya esta e uso</span>
+                    
                     
                 </div>
             </div>
@@ -41,8 +45,11 @@
                 <label class="col-sm-3 col-form-label">Password</label>
                 <div class="col-sm-9" >
                     <input type="password" 
+                    formControlName="password"
                     class="form-control" 
                     placeholder="password de su cuenta" >
+                    <span *ngIf="campoNoValido('password')" 
+                    class="form-text text-danger" > la contrasena debe ser mayor a 6</span>
                     
                 </div>
             </div>
@@ -53,13 +60,15 @@
                 <div class="col-sm-9" >
                     <input type="password" 
                     class="form-control" 
+                    formControlName="verificaPassword"
                     placeholder="confirmar password de su cuenta" >
-                    
+                    <span *ngIf="campoNoValido('verificaPassword')" 
+                    class="form-text text-danger" > las contrasenas no coinciden</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <button (click)="submitFormulario()" type="submit" class="btn btn-primary float-end" >
+                    <button [disabled]='miFormulario.pending || miFormulario.invalid' (click)="submitFormulario()" type="submit" class="btn btn-primary float-end" >
                         Crear
                     </button>
                 </div>
@@ -68,6 +77,8 @@
     </div>
 </div>
 <h2>form valid: {{miFormulario.valid}}</h2>
+<h2>form estatus: {{miFormulario.status}}</h2>
 <h2>nombre {{miFormulario.controls.nombre.errors|json}}</h2>
 <h2>email {{miFormulario.controls.email.errors|json}}</h2>
 <h2>userName {{miFormulario.controls.userName.errors|json}}</h2>
+<h2>password {{miFormulario.controls.password?.errors|json}}</h2>
